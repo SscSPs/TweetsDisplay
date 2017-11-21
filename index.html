@@ -6,10 +6,10 @@
 	</head>
 	<body>
 		<div>
-			<input type="text" id="Tusername" placeholder="Twitter Username" />
-			<button id="fetch" onClick="begin();" >Fetch New Tweets</button>
+			<input type="text" id="Tusername" placeholder="Twitter Username" value="realDonaldTrump"/>
+			<button id="fetch" onClick="begin(Tusername.value);" >Fetch New Tweets</button>
 		</div>
-		<button id="fetch" onClick="clearTweets();" >Clear Tweets</button>
+		<button id="fetch" onClick="clearTweets('User Requested clearance. Removing tweets.');" >Clear Tweets</button>
 		<div id="tweets"></div>
 
 

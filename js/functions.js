@@ -1,13 +1,17 @@
 
-let tUN;
+let previousUN;
 let tweets;
+let tweetCount = 10;
 
 function initdata(){
-tUN = document.getElementById("Tusername").value;
-tweets = document.getElementById("tweets");
+	tweets = document.getElementById("tweets");
 }
 
-function begin() {
+function begin(tUN) {
+	if(previousUN != tUN && tUN.length != 0){
+		clearTweets("New Username selected, clearing old tweets.");
+		previousUN = tUN;
+	}
 	if (tUN.length == 0) {
 		tweets.innerHTML = "No User Selected.";
 		alert("Enter Username First.");
@@ -19,12 +23,12 @@ function begin() {
 				tweets.innerHTML = this.responseText;
 			}
 		};
-		xmlhttp.open("GET", "pulltweets.php?q=" + tUN, true);
+		xmlhttp.open("GET", "pulltweets.php?u=" + tUN + "&c=" + tweetCount, true);
 		xmlhttp.send();
 	}
 }
 
-function clearTweets(){
-	console.log("Clearing");
-	tweets.innerHTML = "Cleared.";
+function clearTweets(logMessage){
+	console.log(logMessage);
+	tweets.innerHTML = "";
 }
