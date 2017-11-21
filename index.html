@@ -5,17 +5,57 @@
 		<script src="/js/functions.js"></script>
 	</head>
 	<body>
-		<div>
-			<input type="text" id="Tusername" placeholder="Twitter Username" value="realDonaldTrump"/>
-			<button id="fetch" onClick="begin(Tusername.value);" >Fetch New Tweets</button>
+		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+			<a class="navbar-brand" href="#">Recents Tweets</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav mr-auto">
+					<li class="nav-item active">
+						<a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+					</li>
+				</ul>
+				<form class="form-inline my-2 my-lg-3">
+					<button class="btn btn-outline-success my-2 my-sm-0" onclick="empty();" >Clear all</button>
+				</form>
+			</div>
+		</nav>
+
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-3" style="text-align:right">
+					<form class="my-3">
+						<div class="form-group" style="text-align:left">
+							<label for="Tusername">Twitter Handle</label>
+							<input type="text" style="text-align:right" class="form-control" id="Tusername"  placeholder="Twitter Username" value="realDonaldTrump" aria-label="Search for...">
+						</div>
+						<div class="form-group" style="text-align:left">
+							<label for="Tusername">Tweets Count</label>
+							<input type="number" style="text-align:right" class="form-control" id="countNeeded" placeholder="Number of tweets" value="10" aria-label="How many?">
+						</div>
+						<button id="fetch" class="btn btn-primary" onClick="begin(Tusername.value, countNeeded.value);" >Fetch New Tweets</button>
+					</form>
+				</div>
+				<div class="col-lg-8 my-3">
+					
+					<div style="text-align:right">
+						<button id="cleartweets" class="btn btn-dark" style="text-align:right" onClick="clearTweets('User Requested clearance. Removing tweets.');" >Clear Tweets</button>
+					</div>
+					<div id="tweets">Tweets will appear here once the query completes!</div>
+				</div>
+			</div>
 		</div>
-		<button id="fetch" onClick="clearTweets('User Requested clearance. Removing tweets.');" >Clear Tweets</button>
-		<div id="tweets"></div>
-
-
+			
+		</div>
 		<script>
-			initdata();
+			initdata(Tusername.value);
 			begin(Tusername.value);
+			function empty(){
+				Tusername.value = '';
+				countNeeded.value = 0;
+				clearTweets();
+			}
 		</script>
 	</body>
 </html>
